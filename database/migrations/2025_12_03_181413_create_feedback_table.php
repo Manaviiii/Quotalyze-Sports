@@ -9,30 +9,32 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-   public function up()
+    public function up(): void
     {
-        Schema::create('reports', function (Blueprint $table) {
+        Schema::create('feedback', function (Blueprint $table) {
             $table->id();
 
             $table->foreignId('user_id')->nullable()->constrained()->onDelete('set null');
 
             $table->string('usuario')->nullable();
 
-            $table->string('tipo')->default('general');
+            // Categoría: 'ui', 'estadisticas', 'cuotas', 'general', etc.
+            $table->string('categoria')->default('general');
 
+            // Mensaje principal del usuario
             $table->text('mensaje');
 
-            $table->foreignId('match_id')->nullable()->constrained('matches')->onDelete('cascade');
-
-            $table->boolean('esta_arreglada')->default(false);
+            $table->boolean('revisado')->default(false);
 
             $table->timestamps();
         });
     }
 
-    public function down()
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
     {
-        Schema::dropIfExists('reports');
+        Schema::dropIfExists('feedback');
     }
-
 };
