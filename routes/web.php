@@ -36,3 +36,7 @@ Route::post('/admin/reportes/{id}/arreglado', [ReportController::class, 'marcarA
 Route::get('/probar-reportes', function () {
     return view('test_report');
 });
+
+use App\Http\Controllers\H2HController;
+
+Route::get('/h2h', [H2HController::class, 'buscar']);
