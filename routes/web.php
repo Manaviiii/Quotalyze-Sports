@@ -20,3 +20,19 @@ Route::post('/admin/feedback/{id}/revisado', [FeedbackController::class, 'marcar
 Route::get('/probar-feedback', function () {
     return view('test_feedback');
 });
+
+
+use App\Http\Controllers\ReportController;
+
+// Enviar reporte
+Route::post('/reportar', [ReportController::class, 'store']);
+
+// Ver lista de reportes (admin)
+Route::get('/admin/reportes', [ReportController::class, 'index']);
+
+// Marcar reporte como arreglado
+Route::post('/admin/reportes/{id}/arreglado', [ReportController::class, 'marcarArreglado']);
+
+Route::get('/probar-reportes', function () {
+    return view('test_report');
+});
