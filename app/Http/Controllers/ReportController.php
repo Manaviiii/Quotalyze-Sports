@@ -9,7 +9,7 @@ class ReportController extends Controller
 {
     /**
      * Guarda un reporte enviado por el usuario.
-     */
+     */ 
    public function store(Request $request)
     {
         $validated = $request->validate([
