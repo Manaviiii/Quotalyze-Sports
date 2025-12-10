@@ -40,3 +40,10 @@ Route::get('/probar-reportes', function () {
 use App\Http\Controllers\H2HController;
 
 Route::get('/h2h', [H2HController::class, 'buscar']);
+
+use App\Http\Controllers\MatchController;
+
+Route::get('/partidos', [MatchController::class, 'index']);
+
+Route::get('/partidos/{id}', [MatchController::class, 'show']);
+
