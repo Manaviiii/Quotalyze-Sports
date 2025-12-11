@@ -1,112 +1,58 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Probar Reportes</title>
+@extends('layouts.app')
 
-    <style>
-        #matchError, #mensajeError {
-            color: red;
-            display: none;
-            margin-top: 5px;
-        }
+@section('title', 'Reportar Problema')
 
-        .input-error {
-            border: 2px solid red !important;
-        }
-    </style>
-</head>
-<body>
-    <h1>Enviar un reporte</h1>
+{{-- Importar solo el CSS de esta página --}}
+@vite(['resources/css/report.css'])
 
-    <form id="reportForm" method="POST" action="/reportar">
-        @csrf
+@section('content')
 
-        <label>Nombre (opcional):</label><br>
-        <input type="text" name="usuario"><br><br>
+<div class="report-container">
 
-        <label>Tipo:</label><br>
-        <select name="tipo">
-            <option value="general">General</option>
-            <option value="partido">Partido</option>
-            <option value="cuota">Cuota</option>
-            <option value="error">Error técnico</option>
-        </select><br><br>
+    <h1 class="report-title">⚠️ Reportar un Problema</h1>
 
-        <label>ID del partido (opcional):</label><br>
-        <input type="number" name="match_id" id="match_id">
-        <p id="matchError">Error: el ID del partido no existe.</p>
-        <br><br>
+    <div class="report-card">
 
-        <label>Mensaje:</label><br>
-        <textarea name="mensaje" id="mensaje" required></textarea>
-        <p id="mensajeError">Error: el mensaje no puede estar vacío.</p>
-        <br><br>
+        @if(session('success'))
+            <div class="alert-success">{{ session('success') }}</div>
+        @endif
 
-        <button type="submit">Enviar Reporte</button>
-    </form>
+        @if($errors->any())
+            <div class="alert-error">
+                <ul>
+                    @foreach($errors->all() as $error)
+                        <li>• {{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
 
+        <form method="POST" action="/reportar">
+            @csrf
 
-<script>
-document.getElementById("reportForm").addEventListener("submit", async function(e) {
-    e.preventDefault();
+            <label>Tu nombre (opcional)</label>
+            <input type="text" name="usuario">
 
-    const matchInput = document.getElementById("match_id");
-    const errorMatch = document.getElementById("matchError");
+            <label>Tipo de reporte</label>
+            <select name="tipo">
+                <option value="general">General</option>
+                <option value="partido">Partido</option>
+                <option value="cuota">Cuota incorrecta</option>
+                <option value="error">Error técnico</option>
+            </select>
 
-    const mensajeInput = document.getElementById("mensaje");
-    const errorMensaje = document.getElementById("mensajeError");
+            <label>ID del partido (opcional)</label>
+            <input type="number" name="match_id">
 
-    // Resetear estilos
-    matchInput.classList.remove("input-error");
-    mensajeInput.classList.remove("input-error");
-    errorMatch.style.display = "none";
-    errorMensaje.style.display = "none";
+            <label>Descripción del problema</label>
+            <textarea name="mensaje" required></textarea>
 
-    // VALIDACIÓN LOCAL: mensaje vacío
-    if (mensajeInput.value.trim() === "") {
-        mensajeInput.classList.add("input-error");
-        errorMensaje.style.display = "block";
-        return; 
-    }
+            <button class="report-submit">Enviar Reporte</button>
 
-    const formData = new FormData(this);
+        </form>
 
-    try {
-        const response = await fetch("/reportar", {
-            method: "POST",
-            headers: {
-                "Accept": "application/json"
-            },
-            body: formData
-        });
+    </div>
 
-        const result = await response.json();
+</div>
 
-        if (!response.ok) {
-            if (result.errors) {
-                if (result.errors.match_id) {
-                    matchInput.classList.add("input-error");
-                    errorMatch.innerText = result.errors.match_id[0];
-                    errorMatch.style.display = "block";
-                }
-
-                if (result.errors.mensaje) {
-                    mensajeInput.classList.add("input-error");
-                    errorMensaje.innerText = result.errors.mensaje[0];
-                    errorMensaje.style.display = "block";
-                }
-            }
-            return;
-        }
-
-        alert("Reporte enviado correctamente 🎉");
-        this.reset();
-
-    } catch (error) {
-        console.error("Error:", error);
-    }
-});
-</script>
-
-</body>
-</html>
+@endsection

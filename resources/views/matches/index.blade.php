@@ -3,38 +3,27 @@
 @section('title', 'Lista de Partidos')
 
 @section('content')
-<h1 class="text-5xl font-extrabold text-red-600 mb-5">PRUEBA TAILWIND 🔥</h1>
 
+<h1 class="text-4xl font-extrabold text-primary mb-8">
+    Lista de Partidos
+</h1>
 
-<div class="max-w-3xl mx-auto">
+@if($matches->count() == 0)
+    <p>No hay partidos aún.</p>
+@else
+    @foreach ($matches as $match)
+        <a href="/partidos/{{ $match->id }}">
+            <div class="card mb-4 cursor-pointer hover:scale-[1.02] transition">
+                <h2 class="text-xl font-semibold mb-1 text-primary-light">
+                    {{ $match->home_team }} vs {{ $match->away_team }}
+                </h2>
 
-    <h1 class="text-3xl font-bold mb-6 text-gray-800">Lista de Partidos</h1>
-
-    @if($matches->count() == 0)
-
-        <p class="text-gray-600 text-lg">No hay partidos aún.</p>
-
-    @else
-
-        <div class="space-y-4">
-            @foreach ($matches as $match)
-                <div class="p-4 bg-white shadow rounded border border-gray-200 hover:shadow-md transition">
-
-                    <a href="/partidos/{{ $match->id }}" 
-                       class="text-blue-600 text-xl font-semibold hover:underline">
-                        {{ $match->home_team }} vs {{ $match->away_team }}
-                    </a>
-
-                    <p class="text-gray-700 mt-1">
-                        <span class="font-medium">Fecha:</span> {{ $match->match_date }}
-                    </p>
-
-                </div>
-            @endforeach
-        </div>
-
-    @endif
-
-</div>
+                <p class="text-sm opacity-80">
+                    <strong>Fecha:</strong> {{ $match->match_date }}
+                </p>
+            </div>
+        </a>
+    @endforeach
+@endif
 
 @endsection

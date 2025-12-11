@@ -1,0 +1,80 @@
+/* ===== HOME PAGE STYLES ===== */
+
+.home-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
+/* Title */
+.home-title {
+    text-align: center;
+    font-size: 42px;
+    font-weight: 800;
+    color: #3b82f6;
+    margin-bottom: 25px;
+}
+
+/* Subtitle */
+.home-subtitle {
+    text-align: center;
+    font-size: 18px;
+    color: #9ca3af;
+    margin-bottom: 40px;
+}
+
+/* Feature Cards */
+.feature-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 20px;
+}
+
+.feature-card {
+    background: rgba(255,255,255,0.05);
+    padding: 25px;
+    border-radius: 15px;
+    border: 1px solid rgba(255,255,255,0.12);
+    backdrop-filter: blur(10px);
+    transition: transform .2s, box-shadow .2s;
+}
+
+.feature-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 20px rgba(59,130,246,0.4);
+}
+
+.feature-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: #60a5fa;
+}
+
+.feature-text {
+    margin-top: 8px;
+    font-size: 14px;
+    color: #d1d5db;
+}
+
+/* CTA button */
+.home-cta {
+    display: flex;
+    justify-content: center;
+    margin-top: 35px;
+}
+
+.home-btn {
+    padding: 12px 30px;
+    border-radius: 12px;
+    background: #3b82f6;
+    color: white;
+    font-weight: 600;
+    font-size: 18px;
+    text-decoration: none;
+    transition: .2s;
+}
+
+.home-btn:hover {
+    background: #60a5fa;
+    box-shadow: 0 0 15px rgba(59,130,246,0.5);
+}

@@ -3,8 +3,9 @@
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 });
+
 
 use App\Http\Controllers\FeedbackController;
 
@@ -47,3 +48,6 @@ Route::get('/partidos', [MatchController::class, 'index']);
 
 Route::get('/partidos/{id}', [MatchController::class, 'show']);
 
+Route::get('/feedback', function () {
+    return view('feedback.form');
+});
