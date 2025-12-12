@@ -1,34 +1,75 @@
 @import "tailwindcss";
 
+/* ===== VARIABLES ===== */
 :root {
-    --bg-dark: #0d0f13;
+    --bg-dark: #090808;
     --bg-card: #161a20;
     --text-light: #e5e7eb;
     --primary: #3b82f6;
     --primary-light: #60a5fa;
 }
 
-/* Fondo general oscuro */
+/* ===== FONDO GENERAL ===== */
 body {
     background-color: var(--bg-dark);
     color: var(--text-light);
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', sans-serif;
 }
 
-/* Tarjetas */
+/* ============================================================
+   🟦 LOGO FIJO ARRIBA IZQUIERDA (SIN DESPLAZAR NADA)
+   ============================================================ */
+.floating-logo {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 9999;
+}
+
+.floating-logo img {
+    width: 150px;
+    height: auto;
+    object-fit: contain;
+    opacity: 0.95;
+    transition: .2s ease-in-out;
+}
+
+/* Efecto suave sin exagerar */
+.floating-logo img:hover {
+    transform: scale(1.05);
+    opacity: 1;
+}
+
+/* ============================================================
+   📌 CENTRAR TODO EL CONTENIDO DE LAS PÁGINAS
+   ============================================================ */
+.page-content {
+    max-width: 900px; 
+    margin: 0 auto; /* centra horizontalmente */
+    padding: 60px 20px;
+}
+
+/* ============================================================
+   TARJETAS (para vistas de partidos, feedback, reportes…)
+   ============================================================ */
 .card {
     background-color: var(--bg-card);
     border-radius: 12px;
     padding: 20px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.4);
-    transition: 0.2s;
+    margin-bottom: 25px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.45);
+    transition: 0.2s ease-in-out;
 }
 
 .card:hover {
     transform: translateY(-3px);
-    box-shadow: 0 6px 15px rgba(0,0,0,0.6);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.65);
 }
 
-/* Títulos */
+/* Títulos de sección */
 .section-title {
-    @apply text-2xl font-bold mb-3 flex items-center gap-2;
+    @apply text-2xl font-bold mb-4;
+    color: var(--primary-light);
 }

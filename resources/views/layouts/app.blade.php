@@ -2,17 +2,22 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@yield('title', 'Quotalyze Sports')</title>
 
-    {{-- Cargar Tailwind y JS --}}
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-
-    <title>@yield('title', 'Quotalyze')</title>
+    @vite(['resources/css/app.css'])
 </head>
 
-<body class="bg-gray-100 text-gray-900">
+<body>
 
-    <main class="max-w-4xl mx-auto py-6">
+    {{-- LOGO FIJO ARRIBA IZQUIERDA --}}
+    <div class="floating-logo">
+        <a href="{{ url('/') }}">
+            <img src="{{ asset('img/quotalyze_logo.png') }}" alt="Quotalyze Logo">
+        </a>
+    </div>
+
+    {{-- CONTENIDO CENTRADO --}}
+    <main class="page-content">
         @yield('content')
     </main>
 
