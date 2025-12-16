@@ -37,4 +37,13 @@ class MatchController extends Controller
 
         return view('matches.show', compact('match', 'stats', 'h2h', 'odds'));
     }
+
+    public function testApi()
+    {
+        $api = new FootballApiService();
+        $data = $api->get('/status');
+
+        dd($data);
+    }
+
 }

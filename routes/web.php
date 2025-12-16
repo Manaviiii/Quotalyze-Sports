@@ -48,3 +48,4 @@ Route::get('/partidos', [MatchController::class, 'index']);
 
 Route::get('/partidos/{id}', [MatchController::class, 'show']);
 
+Route::get('/test-api', [MatchController::class, 'testApi']);
